@@ -16,7 +16,6 @@ function App() {
 				<Route exact path='/login' Component={Login}></Route>
 				<Route exact path='/register' Component={Register}></Route>
 				<Route exact path='/' Component={Main}></Route>
-
 			</Routes>
 		</div>
 	);
