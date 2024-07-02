@@ -15,20 +15,26 @@ function Login() {
             const res = await fetch("http://localhost:8000/api/users/login", { method: "POST", headers: {
                 "Content-Type": "application/json"
               },
+              credentials: "same-origin",
               body: JSON.stringify({username, password}) }).then(res => res.json())
+            if (res.success) {
+                document.cookie = `token=${res.token}`
+            } else {
+                console.log(res.result)
+            }
             console.log(res)
         } catch (error) {
             console.log(error)
         }
     }
   return (
-    <div className={`grid grid-cols-2 rounded-lg shadow-md bg-gray-50 w-1/2 m-auto mt-40`}>
+    <div className={`grid grid-cols-2 rounded-xl shadow-md bg-gray-50 max-w-fit m-auto mt-48`}>
             <div className='p-5 overflow-hidden'>
-                <img className='rounded-lg shadow-inner border border-gray-500' src='https://img.heartlight.org/crop.php?w=600&q=95&f=overlazy/backgrounds/27.jpg' />
+                <img className='rounded-lg' src='https://img.heartlight.org/crop.php?w=600&q=95&f=overlazy/backgrounds/27.jpg' />
             </div>
-            <form className="p-10" onSubmit={login}>
+            <form className="px-16 flex flex-col justify-center" onSubmit={login}>
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">
-                    Login
+                    Login - Asycuda Report 
                 </h2>
                 <div className="mb-4">
                     <label
@@ -52,12 +58,12 @@ function Login() {
                         htmlFor="password"
                         className="block text-gray-700 font-medium mb-2"
                     >
-                        password
+                        Password
                     </label>
                     <input
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        type="tel"
+                        type="password"
                         id="password"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
                         placeholder="Enter Password"
