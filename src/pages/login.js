@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import style from './login.module.css'
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate();
     const login = async (e) => {
         e.preventDefault()
         if (password.trim() === '' || username.trim() === '') {
@@ -19,6 +21,7 @@ function Login() {
               body: JSON.stringify({username, password}) }).then(res => res.json())
             if (res.success) {
                 document.cookie = `token=${res.token}`
+                navigate('/')
             } else {
                 console.log(res.result)
             }

@@ -21,6 +21,10 @@
 //     }
 //   ];
 
+const roleCatagory = (roles) => {
+  
+}
+
   const data =[{
     Transit: ['SAD', 'SAD_tax'],
     Office: ['THE', 'UAD']
