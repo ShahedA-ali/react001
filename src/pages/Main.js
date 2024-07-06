@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Nav from '../components/Nav'
+import {redirect} from 'react-router-dom'
 
 function Main(props) {
-  console.log(props)
+
+  const logout = () => {
+    console.log(document.cookie)
+    document.cookie = ''
+    console.log(document.cookie)
+    return redirect('/login')
+  }
+  
   return (
-    <div>Main</div>
+    <>
+    <Nav user={props.user} logout={logout} />
+    <main className='ml-72 text-9xl'>
+    </main>
+    </>
   )
 }
 

@@ -1,4 +1,6 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
+import Main from '../pages/Main';
 
 function Auth({children}) {
     const [auth, setAuth] = useState(false);
@@ -12,8 +14,8 @@ function Auth({children}) {
                 .then((response) => response.json())
                 .then((res) => {
                     console.log(res, res.result);
-                    if (res.result) {
-                        setAuth(true);
+                    if (res.status == 'success') {
+                        setAuth(res.data.user);
                         console.log("token");
                     } else {
                         setAuth(false);
@@ -23,8 +25,12 @@ function Auth({children}) {
                 });
         })();
     }, []);
+    console.log(auth)
   return (
-    <> {children} </>
+    <> {auth && React.cloneElement(children, {user: auth})} </>
+    // <>
+    // {auth && <Main user={auth} />}
+    // </>
   )
 }
 
