@@ -118,6 +118,7 @@ code {
       display: inline-flex;
       cursor: pointer;
       text-align: center;
+      justify-content: center;
       gap: 4px;
   }
 

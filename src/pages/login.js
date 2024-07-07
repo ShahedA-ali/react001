@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import style from './login.module.css'
 import { useNavigate } from 'react-router-dom';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 function Login() {
     const [username, setUsername] = useState('')
@@ -46,13 +48,13 @@ function Login() {
                     >
                         Username or Email
                     </label>
-                    <input
+                    <Input
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
                         type="text"
                         id="username"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-                        placeholder="Enter Username or Emial"
+                        className="w-full px-4 py-2 rounded-md focus:outline-none text-base"
+                        placeholder="Enter Username or Email"
                     />
                 </div>
 
@@ -63,23 +65,23 @@ function Login() {
                     >
                         Password
                     </label>
-                    <input
+                    <Input
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         type="password"
                         id="password"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full px-4 py-2 rounded-md text-base"
                         placeholder="Enter Password"
                     />
                 </div>
 
 
-                <button
+                <Button
                     type="submit"
                     className="w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                     Login
-                </button>
+                </Button>
             </form>
         </div>
   )

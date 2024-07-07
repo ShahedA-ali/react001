@@ -41,7 +41,7 @@ const Input = forwardRef(function Input(
         labelStyle = { ...labelStyle, ...labelStyleError };
     } else {
         style = { ...style };
-        labelStyle = { ...labelStyle };
+        labelStyle = typeof labelStyle === 'string' ? labelStyle : {...labelStyle };
     }
     // useEffect below states inValid for required prop passed
     useEffect(() => {
@@ -106,11 +106,12 @@ const Input = forwardRef(function Input(
                         name={name}
                         {...other}
                     />
+                    {console.log(typeof labelStyle, labelStyle)}
                     <label
-                        style={labelStyle}
+                        style={typeof labelStyle !== "string" ? labelStyle : {}}
                         className={`${inValid ? `wrong-label` : ''} label ${
                             inputValue ? 'label-value' : ''
-                        }`}>
+                        } ${typeof labelStyle === "string" ? labelStyle : ''}`}>
                         {label}
                     </label>
                 </div>
