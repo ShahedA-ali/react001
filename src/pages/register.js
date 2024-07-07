@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './login.module.css'
+import Fetch from '../utils/Fetch'
+import MultiSelect from '../components/MultiSelect'
 
 function Register() {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const login = async (e) => {
+    const [roles, setRoles] = useState()
+
+    useEffect(() => {
+        (async function role() {
+            Fetch('http://localhost:8000/api/roles/get_all_roles', 'GET').then(res => res.json()).then(res => setRoles(res))
+        })();
+    }, [])
+    
+
+
+    const register = async (e) => {
         e.preventDefault()
         if (password.trim() === '' || username.trim() === '') {
             alert("Please select a file and provide a description.");
@@ -24,8 +36,11 @@ function Register() {
         }
     }
   return (
-    <div className={`grid gird-cols-3 ${style.bg_cover} h-[94vh]`}>
-            <form className="bg-white p-10 rounded-lg shadow-md w-full h-fit max-w-lg col-start-3 mt-40" onSubmit={login}>
+    <div className={`grid grid-cols-2 rounded-xl shadow-md bg-gray-50 max-w-fit m-auto mt-40`}>
+        <div className='p-5 overflow-hidden'>
+                <img className='rounded-lg max-h-full ' src='https://img.heartlight.org/crop.php?w=600&q=95&f=overlazy/backgrounds/27.jpg' />
+            </div>
+            <form className="p-16 flex flex-col justify-center" onSubmit={register}>
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">
                     Register
                 </h2>
@@ -42,7 +57,7 @@ function Register() {
                         type="text"
                         id="username"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-                        placeholder="Enter Username or Emial"
+                        placeholder="Enter Username"
                     />
                 </div>
                 <div className="mb-4">
@@ -101,11 +116,12 @@ function Register() {
                     >
                         Select A Role
                     </label>
-                    <select name="selectedFruit" defaultValue="orange">
-                        <option value="apple">Apple</option>
-                        <option value="banana">Banana</option>
-                        <option value="orange">Orange</option>
-                    </select>
+                    {roles &&
+                    <MultiSelect textField={'role_name'} data={roles.data.data.roles} />
+                    }
+                    {/* <select name="selectedFruit" className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500' defaultValue="orange">
+                        {roles &&  roles.data.data.roles.map(item => (<option>{item.role_name}</option>))}
+                    </select> */}
                 </div>
 
 
@@ -113,7 +129,7 @@ function Register() {
                     type="submit"
                     className="w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
-                    Login
+                    Register
                 </button>
             </form>
         </div>

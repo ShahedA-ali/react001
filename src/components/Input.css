@@ -1,0 +1,75 @@
+.auto {
+    padding: 4px 8px;
+    border: 1px solid #00000014;
+    font-size: 14px;
+    line-height: 1.4285714286;
+    color: #424242;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.auto:focus {
+    outline-offset: 0px;
+    border: 1px solid #00000029;
+    box-shadow: 0 0 0 2px #00000014;
+    outline: none;
+}
+
+.label {
+    max-width: 90%;
+    font-size: 14px;
+    line-height: 1.4285714286;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+    top: calc( calc( 1.4285714286 * 14px ) + 1px + 4px );
+    left: calc( 8px + 1px );
+    overflow: hidden;
+    cursor: text;
+    transform-origin: left center;
+    transition: transform 0.2s ease-out, color 0.2s ease-out, top 0.2s ease-out, left 0.2s ease-out;
+}
+.label_value {
+    max-width: 90%;
+    font-size: 14px;
+    line-height: 1.4285714286;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+    top: 0;
+    font-size: 12px;
+    left: 0;
+}
+.auto:focus ~ .label {
+    top: 0;
+    font-size: 12px;
+    left: 0;
+}
+.wrapper {
+    padding-top: calc( 1.4285714286 * 14px );
+    box-sizing: border-box;
+    display: inline-flex;
+    vertical-align: middle;
+    position: relative;
+    flex-direction: column;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.wrong {
+    border: 1px solid rgb(224, 0, 0);
+}
+.wrong:focus {
+    border: 1px solid #e00000;
+    /* box-shadow: 0 0 2px 1px #e00000; */
+    outline: none;
+}
+.wrong_label {
+    color: #e00000;
+}
