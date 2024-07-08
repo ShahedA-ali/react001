@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './login.module.css'
 import Fetch from '../utils/Fetch'
 import MultiSelect from '../components/MultiSelect'
+import Input from '../components/Input'
 
 function Register() {
     const [username, setUsername] = useState('')
@@ -21,7 +22,7 @@ function Register() {
     const register = async (e) => {
         e.preventDefault()
         if (password.trim() === '' || username.trim() === '') {
-            alert("Please select a file and provide a description.");
+            alert("Please fill the whole form");
             return;
         }
         console.log(username, password)
@@ -51,12 +52,12 @@ function Register() {
                     >
                         Username
                     </label>
-                    <input
+                    <Input
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
                         type="text"
                         id="username"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full px-4 py-2 rounded-md focus:outline-none"
                         placeholder="Enter Username"
                     />
                 </div>
@@ -67,12 +68,12 @@ function Register() {
                     >
                         Email
                     </label>
-                    <input
+                    <Input
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         type="text"
                         id="email"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full px-4 py-2 rounded-md focus:outline-none"
                         placeholder="Enter Email"
                     />
                 </div>
@@ -84,12 +85,12 @@ function Register() {
                     >
                         password
                     </label>
-                    <input
+                    <Input
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         type="password"
                         id="password"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full px-4 py-2 rounded-md focus:outline-none"
                         placeholder="Enter Password"
                     />
                 </div>
@@ -100,24 +101,24 @@ function Register() {
                     >
                         Confirm Password
                     </label>
-                    <input
+                    <Input
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         value={confirmPassword}
                         type="password"
                         id="Confirmpassword"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full px-4 py-2 rounded-md focus:outline-none"
                         placeholder="Confirm Password"
                     />
                 </div>
-                <div className="mb-6">
+                <div className="mb-8">
                     <label
                         htmlFor="role"
-                        className="block text-gray-700 font-medium mb-2"
+                        className="block text-gray-700 font-medium -mb-2"
                     >
-                        Select A Role
+                        Select Role
                     </label>
                     {roles &&
-                    <MultiSelect textField={'role_name'} data={roles.data.data.roles} />
+                    <MultiSelect textField={'role_name'} placeholder="Select Roles For The User" data={roles.data.data.roles} className={'w-full px-4 py-2 rounded-md focus:outline-none'} />
                     }
                     {/* <select name="selectedFruit" className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500' defaultValue="orange">
                         {roles &&  roles.data.data.roles.map(item => (<option>{item.role_name}</option>))}

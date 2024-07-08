@@ -47,6 +47,7 @@ const Chip = ({
   return (
     <React.Fragment>
             <Button
+                type='button'
                 style={
                     selected && selectedStyle
                         ? { ...style, ...selectedStyle }

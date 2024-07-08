@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Chip from './Chip';
-import ChipList from './ChipList';
 import Input from './Input';
+import Button from './Button';
 import ListItem from './ListItem';
+import ChipList from './ChipList';
+import Chip from './Chip';
 
 const MultiSelect = ({
     data: initialData = [],
@@ -62,9 +63,14 @@ const MultiSelect = ({
             }}
             valueField={textField}
             chip={(props) => {
-                return <Chip size={'medium'} removable={true} {...props} />;
+                const {key, ...newProps} = props
+                return <Chip size={'medium'} removable={true} {...newProps} key={key} />;
             }}></ChipList>
     );
+    if (selectedValue.props.data.length > 0) {
+        other.placeholder = ""
+    }
+    console.log(selectedValue.props.data)
     return (
         <React.Fragment>
             <ul
@@ -73,18 +79,20 @@ const MultiSelect = ({
                 }}
                 className={`option-wrapper`}>
                 <Input
-                    className={` flex-1 ${className} ${
+                    className={` flex-1 ${className} relative ${
                         required && !value ? 'wrong' : ''
                     }`}
-                    wrapperClassName={`flex-row`}
+                    wrapperClassName={`flex-row ${selectedValue.props.data.length > 0 && 'pl-2'}`}
                     {...other}>
                     {selectedValue && selectedValue}
                     {value.length > 0 && (
-                        <span
+                        <Button
                             onClick={() => setValue([])}
-                            className={` text-xl text-gray-400 px-1 self-start cursor-pointer font-bold hover:text-black order-2 icon `}>
+                            fillMode={'flat'}
+                            className={`text-xl absolute z-10 right-0 text-gray-400 self-start font-bold hover:text-black order-2`}
+                            >
                             &times;
-                        </span>
+                        </Button>
                     )}
                 </Input>
                 <div className="div">
