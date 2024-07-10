@@ -43,7 +43,6 @@ const Chip = ({
             );
             break;
     }
-    console.log(other, 'lsdjfiosdjfoijsdfio')
   return (
     <React.Fragment>
             <Button

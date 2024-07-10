@@ -48,12 +48,10 @@ const MultiSelect = ({
             setValue(newData);
         } else {
             setValue((prevState) => {
-                console.log(prevState);
                 return [...prevState, item];
             });
         }
     };
-    console.log(value, 'shahd')
     const selectedValue = (
         <ChipList
             data={value}
@@ -70,7 +68,6 @@ const MultiSelect = ({
     if (selectedValue.props.data.length > 0) {
         other.placeholder = ""
     }
-    console.log(selectedValue.props.data)
     return (
         <React.Fragment>
             <ul

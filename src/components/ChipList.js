@@ -20,15 +20,13 @@ const ChipList = ({
     //     selected: item.selected,
     //     key: item.id || keyGenerator(),
     // }));
-    let customData = initialData.map((item) => {console.log(item); return {dataItem: { ...item },
+    let customData = initialData.map((item) => {return {dataItem: { ...item },
     [textField || 'text']: `${textField ? item[textField] : item.text}`,
     textField,
     [valueField || 'value']: `${valueField ? item[valueField] : item.text}`,
     selected: item.selected,
     key: item.id || keyGenerator(),}});
-    console.log(initialData)
     const [data, setData] = useState(customData);
-    console.log(data);
     const check = JSON.stringify(initialData);
     useEffect(() => {
         setData(customData);
@@ -81,7 +79,6 @@ const ChipList = ({
         setData(removeItem);
         value(removeItem);
     };
-    console.log(data, 'jlisjdfiosjd')
     return (
         <React.Fragment>
             {data &&

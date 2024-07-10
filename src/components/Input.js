@@ -106,7 +106,6 @@ const Input = forwardRef(function Input(
                         name={name}
                         {...other}
                     />
-                    {console.log(typeof labelStyle, labelStyle)}
                     <label
                         style={typeof labelStyle !== "string" ? labelStyle : {}}
                         className={`${inValid ? `wrong-label` : ''} label ${

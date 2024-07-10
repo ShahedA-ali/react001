@@ -9,6 +9,7 @@ function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [selectedRoles, setSelectedRoles] = useState([])
     const [roles, setRoles] = useState()
 
     useEffect(() => {
@@ -17,7 +18,7 @@ function Register() {
         })();
     }, [])
     
-
+    console.log(selectedRoles)
 
     const register = async (e) => {
         e.preventDefault()
@@ -27,10 +28,10 @@ function Register() {
         }
         console.log(username, password)
         try {
-            const res = await fetch("http://localhost:8000/api/users/login", { method: "POST", headers: {
+            const res = await fetch("http://localhost:8000/api/users/register", { method: "POST", headers: {
                 "Content-Type": "application/json"
               },
-              body: JSON.stringify({username, password}) }).then(res => res.json())
+              body: JSON.stringify({username, password, email, roles: selectedRoles}) }).then(res => res.json())
             console.log(res)
         } catch (error) {
             console.log(error)
@@ -118,7 +119,7 @@ function Register() {
                         Select Role
                     </label>
                     {roles &&
-                    <MultiSelect textField={'role_name'} placeholder="Select Roles For The User" data={roles.data.data.roles} className={'w-full px-4 py-2 rounded-md focus:outline-none'} />
+                    <MultiSelect onChange={(e) => setSelectedRoles(e)} textField={'role_name'} placeholder="Select Roles For The User" data={roles.data.data.roles} className={'w-full px-4 py-2 rounded-md focus:outline-none'} />
                     }
                     {/* <select name="selectedFruit" className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500' defaultValue="orange">
                         {roles &&  roles.data.data.roles.map(item => (<option>{item.role_name}</option>))}

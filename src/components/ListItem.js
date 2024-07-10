@@ -23,7 +23,6 @@ function ListItem({
                 ? `${selectedStyleClassName || 'selected'}`
                 : '';
         }
-        console.log('item');
     };
     // if length = 0 in array below will return empty
     // if array has primitives the keyGenerator would generate key for every item
@@ -46,7 +45,6 @@ function ListItem({
                 data.map((item) => (
                     <li
                         className={`option-item ${() => {
-                            console.log('item');
                             select(item);
                         }} ${className}`}
                         onClick={() => {
