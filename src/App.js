@@ -3,7 +3,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import Main from './pages/Main';
 import Auth from './components/Auth';
-import { useEffect } from 'react';
+import Users from './pages/Users';
 
 function App() {
 	// useEffect(() => {
@@ -24,6 +24,7 @@ function App() {
 
 				<Route exact path='/login' Component={Login}></Route>
 				<Route exact path='/register' Component={Register}></Route>
+				<Route exact path='/users' Component={Users}></Route>
 			</Routes>
 		</div>
 	);

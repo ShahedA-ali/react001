@@ -7,7 +7,7 @@ function Auth({children}) {
 
 	useEffect(() => {
         (async function verify() {
-            fetch("http://localhost:8000/api/users/verify", {
+            fetch("http://localhost:8000/api/auth/verify", {
                 headers: { "Authorization": "Bearer " + document.cookie.split('=')[1] }
             })
                 // .catch(history.push('/login'))

@@ -16,7 +16,7 @@ function Login() {
         }
         console.log(username, password)
         try {
-            const res = await fetch("http://localhost:8000/api/users/login", { method: "POST", headers: {
+            const res = await fetch("http://localhost:8000/api/auth/login", { method: "POST", headers: {
                 "Content-Type": "application/json"
               },
               credentials: "same-origin",
