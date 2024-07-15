@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import Main from '../pages/Main';
+import { useNavigate } from 'react-router-dom';
 
 function Auth({children}) {
     const [auth, setAuth] = useState(false);
-
+    const navigate = useNavigate();
 	useEffect(() => {
         (async function verify() {
             fetch("http://localhost:8000/api/auth/verify", {
@@ -19,7 +19,7 @@ function Auth({children}) {
                         console.log("token");
                     } else {
                         setAuth(false);
-                        // history.push("/login");
+                        navigate('/login')
                     }
                     console.log(auth, document.cookie);
                 });

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import data from "./AccordionData";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ObjectAllKeys } from "../utils/ObjectAllKeys";
 
@@ -26,13 +25,14 @@ const AccordionItem = ({ catagory, items, isOpen, onClick }) => {
             : { height: "0px" }
         }
       >
-        <p className="">{items.map(item => (<a href="#" className="block px-7 py-2 text-sm hover:bg-[#16191f]">{item}</a>))}</p>
+        <p className="">{items.map(item => (<a href={`/${item}`} className="block px-7 py-2 text-sm hover:bg-[#16191f]">{item}</a>))}</p>
       </div>
     </div>
   );
 };
 
-const Accordion = () => {
+const Accordion = ({data}) => {
+  console.log(data)
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleItemClick = (index) => {
