@@ -27,7 +27,7 @@ function Nav({ user, setSmallNav, smallNav }) {
                             {user.username.toUpperCase()}
                             <div className='text-sm pl-4'>{user.email}</div>
                         </div>
-                        <Button className={'text-2xl px-1 h-fit pb-2 hover:bg-[#19222a] hover:text-white'} onClick={() => setSmallNav('a')}>
+                        <Button className={'text-2xl px-1 h-fit pb-2 hover:bg-[#19222a] hover:text-white'} onClick={() => setSmallNav()}>
                             &times;
                         </Button>
                     </header>
@@ -49,7 +49,7 @@ function Nav({ user, setSmallNav, smallNav }) {
             </section>
         }
         {smallNav && <section className="fixed top-3 right-5 nav">
-                        <Button className={'text-2xl px-1 h-fit pb-2 text-[#19222a] bg-[#19fa] '} onClick={() => setSmallNav(true)}>
+                        <Button className={'text-2xl px-1 h-fit pb-2 text-[#19222a] bg-[#19fa] '} onClick={() => setSmallNav()}>
                             <FaBars />
                         </Button>
             </section>}
