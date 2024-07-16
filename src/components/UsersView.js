@@ -38,7 +38,7 @@ const UsersView = ({ data = [], deleteUser, update }) => {
                                     <div className='p-2'>
                                     <Button
                                         onClick={() => {
-                                            update(user.id);
+                                            update(user);
                                         }}
                                         className="inline-block bg-yellow-600 text-white py-1.5 rounded"
                                         title="Edit"

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Fetch from '../utils/Fetch'
 import UsersView from '../components/UsersView'
-import { Link } from 'react-router-dom'
+import { Link, useAsyncError } from 'react-router-dom'
 import Button from '../components/Button'
+import Update from '../components/Update'
 
 function Users({ }) {
     const [users, setUsers] = useState('')
@@ -27,7 +28,7 @@ function Users({ }) {
         ).then(res => { setVisibleDel(false); fetchUsers() });
     };
 
-    console.log(users)
+    const [updateModal, setUpdateModal] = useState(false)
 
 
     return (
@@ -57,8 +58,8 @@ function Users({ }) {
 
                     <UsersView
                         data={users.data}
-                        deleteUser={(id) => { setVisibleDel(true); setUser(id) }}
-                    // update={(id) => update(id)}
+                        deleteUser={(user) => { setVisibleDel(true); setUser(user) }}
+                        update={(user) => {setUpdateModal(true); setUser(user)}}
                     />
                 }
             </table>
@@ -79,16 +80,16 @@ function Users({ }) {
                     No Result
                 </div>
             )}
-            {/* {updateModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
-                {updateModal && (
-                    <Update
-                        visible={() => updateShow()}
-                        data={updateData}
-                    />
-                )}
-            </div>
-        )} */}
+            {updateModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center" onClick={() => setUpdateModal(false)}>
+                    {updateModal && (
+                        <Update
+                            visible={() => setUpdateModal()}
+                            user={user}
+                        />
+                    )}
+                </div>
+            )}
             {visibleDel && (
                 <div
                     onClick={() => setVisibleDel(false)}
