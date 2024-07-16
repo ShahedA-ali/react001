@@ -6,6 +6,7 @@ import Auth from './components/Auth';
 import Users from './pages/Users';
 import Protect from './utils/Protect';
 import Sad_general from './pages/Sad_general';
+import Layout from './components/Layout';
 
 function App() {
 	// useEffect(() => {
@@ -18,8 +19,8 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route exact path='/' element={<Auth><Main /></Auth>}></Route>
-				<Route exact path='/SAD_GENERAL_SEGMENT' element={<Auth><Protect><Sad_general /></Protect></Auth>}></Route>
+				<Route exact path='/' element={<Auth><Layout><Main /></Layout></Auth>}></Route>
+				<Route exact path='/SAD_GENERAL_SEGMENT' element={<Auth><Protect><Layout><Sad_general /></Layout></Protect></Auth>}></Route>
 			</Routes>
 			<Routes>
 				

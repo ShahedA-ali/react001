@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ObjectAllKeys } from "../utils/ObjectAllKeys";
+import keyGenerator from "../utils/keyGenerator";
+import { Link } from "react-router-dom";
 
 
 const AccordionItem = ({ catagory, items, isOpen, onClick }) => {
@@ -25,7 +27,7 @@ const AccordionItem = ({ catagory, items, isOpen, onClick }) => {
             : { height: "0px" }
         }
       >
-        <p className="">{items.map(item => (<a href={`/${item}`} className="block px-7 py-2 text-sm hover:bg-[#16191f]">{item}</a>))}</p>
+        <p className="">{items.map(item => (<Link to={`/${item}`} key={keyGenerator()} className="block px-7 py-2 text-sm hover:bg-[#16191f]">{item}</Link>))}</p>
       </div>
     </div>
   );

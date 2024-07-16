@@ -30,7 +30,6 @@ const roles = (rolesArray) => {
             delete rolesForUser[`${catagory}`]
         }
     }
-
     return [rolesForUser]
 }
 

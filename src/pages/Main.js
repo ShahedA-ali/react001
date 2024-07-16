@@ -13,9 +13,11 @@ function Main(props) {
   
   return (
     <>
-    <Nav user={props.user} logout={logout} />
-    <main className='ml-72 text-9xl'>
-    </main>
+    {/* <Nav user={props.user} logout={logout} /> */}
+    {/* <main className='ml-72 text-9xl'>
+      mian page
+    </main> */}
+    main page
     </>
   )
 }

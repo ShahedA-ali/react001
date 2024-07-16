@@ -28,7 +28,8 @@ function Protect(props) {
             YOu do not have permistion
         
         </div>}
-      {permit && props.children}
+        {permit && React.cloneElement(props.children, {user: props.user})} 
+      {/* {permit && props.children} */}
     </>
   );
 }
