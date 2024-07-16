@@ -21,13 +21,13 @@ function App() {
 			<Routes>
 				<Route exact path='/' element={<Auth><Layout><Main /></Layout></Auth>}></Route>
 				<Route exact path='/SAD_GENERAL_SEGMENT' element={<Auth><Protect><Layout><Sad_general /></Layout></Protect></Auth>}></Route>
+				<Route exact path='/USER_VIEW' element={<Auth><Protect><Layout><Users /></Layout></Protect></Auth>}></Route>
+				<Route exact path='/USER_CREATE' element={<Auth><Protect><Layout><Register /></Layout></Protect></Auth>}></Route>
 			</Routes>
 			<Routes>
 				
 
 				<Route exact path='/login' Component={Login}></Route>
-				<Route exact path='/register' Component={Register}></Route>
-				<Route exact path='/users' Component={Users}></Route>
 			</Routes>
 		</div>
 	);
