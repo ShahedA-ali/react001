@@ -97,7 +97,7 @@ function Users({ }) {
                 >
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="bg-white p-8 rounded text-center"
+                        className="bg-gray-50 p-8 rounded text-center"
                     >
                         <p className="mb-7">
                             Are you sure you want to delete this record?
