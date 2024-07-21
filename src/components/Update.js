@@ -1,24 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from './Input'
+import Fetch from '../utils/Fetch'
+import ListBox from './ListBox'
+import Button from './Button'
 
 function Update({ user, visible }) {
     const [username, setUsername] = useState(user.username)
     const [email, setEmail] = useState(user.email)
     const [password, setPassword] = useState(user.password)
-    const [selectedRoles, setSelectedRoles] = useState([])
+    const [selectedRoles, setSelectedRoles] = useState()
     const [roles, setRoles] = useState()
+    console.log(user.roles)
+    useEffect(() => {
+        (async function role() {
+            Fetch('http://localhost:8000/api/roles/get_all_roles', 'GET').then(res => res.json()).then(res => {
+                const allRoles = res.data.data.roles.map(role => role.role_name)
+                const reminingRoles = allRoles.filter(role => !user.roles.includes(role))
+                const rolesForLists = []
+                rolesForLists.push({reminingRoles})
+                rolesForLists.push({userRoles: user.roles})
+                setRoles(rolesForLists)    
+                // setRoles([{reminingRoles, userRoles: user.roles}])    
+            })
+        })();
+    }, [])
 
-
-    console.log(user)
     return (
-        <div className={`rounded-xl shadow-md bg-gray-50 m-auto w-1/2`} onClick={(e) => e.stopPropagation()}>
+        <div className={`rounded-xl shadow-md bg-gray-50 m-auto w-fit`} onClick={(e) => e.stopPropagation()}>
             {/* <div className='p-5 overflow-hidden'>
                 <img className='rounded-lg max-h-full ' src='https://img.heartlight.org/crop.php?w=600&q=95&f=overlazy/backgrounds/27.jpg' />
             </div> */}
             <form className="p-12 flex flex-col" onSubmit={Update}>
-                <h2 className="text-2xl font-bold mb-6 pb-6 text-gray-800 border-b">
-                    Update User with ID: {user.id}
-                </h2>
+                <div className='flex justify-between mb-6 pb-6 text-gray-800 border-b'>
+                    <h2 className="text-2xl font-bold">
+                        Update User with ID: {user.id}
+                    </h2>
+                    <Button type={'button'} onClick={() => visible()}>&times;</Button>
+                </div>
 
                 <div className='grid grid-cols-2 gap-10'>
 
@@ -82,6 +100,10 @@ function Update({ user, visible }) {
                             >
                                 Select Roles
                             </label>
+                            {roles && 
+                            <ListBox className={'w-56 h-72 text-gray-800'} data={roles} onChange={(e) => setSelectedRoles(e)} />
+                            // <ListBox className={'w-56 h-72 text-gray-800'} data={roles} onChange={(e) => {console.log(e)}} />
+                            }
                             {/* {roles &&
                         <MultiSelect onChange={(e) => setSelectedRoles(e)} textField={'role_name'} placeholder="Select Roles For The User" data={roles.data.data.roles} className={'w-full px-4 py-2 rounded-md focus:outline-none'} />
                     } */}

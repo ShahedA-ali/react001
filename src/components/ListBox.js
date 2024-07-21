@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { keyGenerator, ObjectAllKeys } from ".";
 import {
     FaAngleDoubleLeft,
     FaAngleDoubleRight,
@@ -7,16 +6,33 @@ import {
     FaAngleRight,
 } from "react-icons/fa";
 import Button from "./Button";
+import keyGenerator from "../utils/keyGenerator";
+import { ObjectAllKeys } from "../utils/ObjectAllKeys";
 
-function ListBox({ className, data: initialData, headingsInOrder }) {
+function ListBox({ className, data: initialData, headingsInOrder, ...other }) {
     const [data, setData] = useState();
     const [selection, setSelection] = useState();
 
+    useEffect(() => {
+      if (data) {
+        if (other.onChange) {
+          let result = []
+          let i = 0
+          initialData.map((catagory) => {
+            for(const key in catagory) {
+              result.push({[key]: data[i][`array-${i}`].map(element => element[0])})
+              i++;
+            }
+          })
+            other.onChange(data);
+        }
+      }
+    });
 
     useEffect(() => {
         let result = []
         let i = 0
-        initialData.map((catagory) => {
+        initialData.forEach((catagory) => {
             for (const key in catagory) {
                 console.log(key)
                 result.push({[`array-${i}`]: catagory[key].map(item => [item, keyGenerator()])})
@@ -27,7 +43,7 @@ function ListBox({ className, data: initialData, headingsInOrder }) {
 
         setData(result)
     }, [])
-    console.log(data)
+    console.log(initialData)
 
 
     const select = (key) => {
@@ -106,27 +122,27 @@ function ListBox({ className, data: initialData, headingsInOrder }) {
                     return [
                         <>
                             {i > 0 && (
-                                <div className="flex flex-col justify-center self-center h-full p-2 gap-1">
-                                    <Button className={"shift-btn"} disabled={disableAllRight()} onClick={() => shiftAllToRight()}>
+                                <div className="flex flex-col justify-center self-center h-full p-2 gap-1" key={keyGenerator()}>
+                                    <Button type={'button'} className={"shift-btn"} disabled={disableAllRight()} onClick={() => shiftAllToRight()}>
                                         <FaAngleDoubleRight className="align-middle" />
                                     </Button>
-                                    <Button className={"shift-btn"} disabled={disableRight()} onClick={() => shiftToRigth(selection)}>
+                                    <Button type={'button'} className={"shift-btn"} disabled={disableRight()} onClick={() => shiftToRigth(selection)}>
                                         <FaAngleRight className="align-middle" />
                                     </Button>
-                                    <Button className={"shift-btn"} disabled={disableLeft()} onClick={() => shiftToLeft(selection)}>
+                                    <Button type={'button'} className={"shift-btn"} disabled={disableLeft()} onClick={() => shiftToLeft(selection)}>
                                         <FaAngleLeft className="align-middle" />
                                     </Button>
-                                    <Button className={"shift-btn"} disabled={disableAllLeft()} onClick={() => shiftAllToLeft()}>
+                                    <Button type={'button'} className={"shift-btn"} disabled={disableAllLeft()} onClick={() => shiftAllToLeft()}>
                                         <FaAngleDoubleLeft className="align-middle" />
                                     </Button>
                                 </div>
                             )}
                         </>,
                         <div key={keyGenerator()}>
-                            <h2 className="text-lg mb-0">{headingsInOrder[i] || keys[i]}</h2>
-                            <div className="border border-gray-300 border-solid rounded-sm overflow-y-auto h-full min-w-[200] w-48">
+                            <h2 className="text-lg mb-0 text-gray-600">{headingsInOrder ? headingsInOrder[i] : keys[i]}</h2>
+                            <div className={`border border-gray-300 border-solid rounded-sm overflow-y-auto h-full min-w-[200] w-48 ${className}`}>
                                 {catagory['array-' + [i]].map((item) => (
-                                    <div key={item[1]} className={`cursor-pointer p-2 hover:bg-gray-200 ${selection === item[1] && 'bg-blue-500 text-white hover:bg-blue-600'}`} onClick={() => select(item[1])}>{item[0]}</div>
+                                    <div key={item[1]} className={`cursor-pointer p-2 hover:text-gray-700 hover:bg-gray-200 ${selection === item[1] && 'bg-blue-500 text-white hover:bg-blue-600'}`} onClick={() => select(item[1])}>{item[0]}</div>
                                 ))}
                             </div>
                         </div>,
