@@ -8,9 +8,9 @@ function Update({ user, visible }) {
     const [username, setUsername] = useState(user.username)
     const [email, setEmail] = useState(user.email)
     const [password, setPassword] = useState(user.password)
-    const [selectedRoles, setSelectedRoles] = useState()
     const [roles, setRoles] = useState()
-    console.log(user.roles)
+    const [selectedRoles, setSelectedRoles] = useState(roles)
+    console.log(selectedRoles)
     useEffect(() => {
         (async function role() {
             Fetch('http://localhost:8000/api/roles/get_all_roles', 'GET').then(res => res.json()).then(res => {
@@ -23,14 +23,19 @@ function Update({ user, visible }) {
                 // setRoles([{reminingRoles, userRoles: user.roles}])    
             })
         })();
-    }, [])
+    }, [user.roles])
+    console.log(roles)
+    const UpdateRecord = async (id) => {
+        const updated = await Fetch(`http://localhost:8000/api/users/${id}`, "PUT", {username, email, password, roles: selectedRoles[1]['userRoles']})
+        console.log(updated)
+    }
 
     return (
         <div className={`rounded-xl shadow-md bg-gray-50 m-auto w-fit`} onClick={(e) => e.stopPropagation()}>
             {/* <div className='p-5 overflow-hidden'>
                 <img className='rounded-lg max-h-full ' src='https://img.heartlight.org/crop.php?w=600&q=95&f=overlazy/backgrounds/27.jpg' />
             </div> */}
-            <form className="p-12 flex flex-col" onSubmit={Update}>
+            <form className="p-12 flex flex-col" onSubmit={() => UpdateRecord(user.id)}>
                 <div className='flex justify-between mb-6 pb-6 text-gray-800 border-b'>
                     <h2 className="text-2xl font-bold">
                         Update User with ID: {user.id}
@@ -101,7 +106,7 @@ function Update({ user, visible }) {
                                 Select Roles
                             </label>
                             {roles && 
-                            <ListBox className={'w-56 h-72 text-gray-800'} data={roles} onChange={(e) => setSelectedRoles(e)} />
+                            <ListBox className={'w-56 h-60 text-gray-800'} data={roles} onChange={(e) => setSelectedRoles(e)} />
                             // <ListBox className={'w-56 h-72 text-gray-800'} data={roles} onChange={(e) => {console.log(e)}} />
                             }
                             {/* {roles &&

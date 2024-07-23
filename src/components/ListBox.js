@@ -12,6 +12,7 @@ import { ObjectAllKeys } from "../utils/ObjectAllKeys";
 function ListBox({ className, data: initialData, headingsInOrder, ...other }) {
     const [data, setData] = useState();
     const [selection, setSelection] = useState();
+    const [onChangeData, setOnChangeData] = useState(initialData);
 
     useEffect(() => {
       if (data) {
@@ -23,26 +24,28 @@ function ListBox({ className, data: initialData, headingsInOrder, ...other }) {
               result.push({[key]: data[i][`array-${i}`].map(element => element[0])})
               i++;
             }
+            return other.onChange(result)
           })
-            other.onChange(data);
+        //   {() => other.onChange(result)}
         }
       }
-    });
-
+    }, [data]);
+    // other.onChange = onChangeData
     useEffect(() => {
         let result = []
         let i = 0
-        initialData.forEach((catagory) => {
+        initialData.map((catagory) => {
             for (const key in catagory) {
                 console.log(key)
                 result.push({[`array-${i}`]: catagory[key].map(item => [item, keyGenerator()])})
                 i++;
             }
+            return result
         }
         );
 
         setData(result)
-    }, [])
+    }, [initialData])
     console.log(initialData)
 
 
@@ -122,7 +125,7 @@ function ListBox({ className, data: initialData, headingsInOrder, ...other }) {
                     return [
                         <>
                             {i > 0 && (
-                                <div className="flex flex-col justify-center self-center h-full p-2 gap-1" key={keyGenerator()}>
+                                <div className="flex flex-col justify-center self-center h-full p-2 gap-1">
                                     <Button type={'button'} className={"shift-btn"} disabled={disableAllRight()} onClick={() => shiftAllToRight()}>
                                         <FaAngleDoubleRight className="align-middle" />
                                     </Button>
@@ -154,3 +157,4 @@ function ListBox({ className, data: initialData, headingsInOrder, ...other }) {
 }
 
 export default ListBox;
+

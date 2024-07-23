@@ -20,7 +20,7 @@ function Login() {
                 "Content-Type": "application/json"
               },
               credentials: "same-origin",
-              body: JSON.stringify({username, password}) }).then(res => res.json())
+              body: JSON.stringify({username, password})}).then(res => res.json())
             if (res.success) {
                 document.cookie = `token=${res.token}`
                 navigate('/')
