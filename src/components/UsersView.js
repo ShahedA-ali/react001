@@ -1,8 +1,9 @@
 import React from 'react'
 import Button from './Button'
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa'
+import keyGenerator from '../utils/keyGenerator'
 
-const UsersView = ({ data = [], deleteUser, update }) => {
+const UsersView = ({ data, deleteUser, update }) => {
     console.log(data)
     const date = (created_at) => {
         console.log(created_at)
@@ -22,7 +23,7 @@ const UsersView = ({ data = [], deleteUser, update }) => {
                 </tr>
             </thead>
             <tbody>
-                {
+                {data &&
                     data.users.map((user) => {
                         console.log(user)
                         return (
@@ -33,7 +34,7 @@ const UsersView = ({ data = [], deleteUser, update }) => {
                                     <td className='px-4 py-2'>{user.username}</td>
                                     <td className='p-2'>{user.email}</td>
                                     <td className='p-2'>{date(user.created_at)}</td>
-                                    <td className='px-4 py-2'><div className='max-h-36 p-2 border overflow-y-auto min-w-fit'>{user.roles.map(role => (<div className=''>{role}</div>))}</div></td>
+                                    <td className='px-4 py-2'><div className='max-h-36 p-2 border overflow-y-auto min-w-fit'>{user.roles.map(role => (<div key={keyGenerator()} className=''>{role}</div>))}</div></td>
                                 <td>
                                     <div className='p-2'>
                                     <Button

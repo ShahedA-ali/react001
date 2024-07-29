@@ -18,8 +18,8 @@ function Nav({ user, setSmallNav, smallNav }) {
         <>
         
         {
-            !smallNav && 
-            <section className="h-screen fixed nav top-0">
+            
+            <section className={`h-screen ${!smallNav ? 'h-screen': 'h-0'} fixed nav top-0`}>
                 <aside className="w-72 h-full top-0 overflow-hidden bg-[#19222a]">
                     <header className='bg-[#19fa] w-full flex justify-between px-3 py-4 font-bold text-2xl'>
                         <div>

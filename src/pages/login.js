@@ -1,17 +1,37 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import style from './login.module.css'
 import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Alert from '../components/Alert';
+import keyGenerator from '../utils/keyGenerator';
 
 function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
+    const [alerts, setAlerts] = useState([]);
+
+    const addAlert = useCallback((message, type) => {
+        if (alerts.length < 5) {
+            const id = keyGenerator()
+            setAlerts([...alerts, { id, message, type }]);
+        } else {
+            setAlerts(prev => [...prev, prev.shift()])
+            const id = keyGenerator()
+            setAlerts([...alerts, { id, message, type }]);
+        }
+    }, [alerts]);
+
+    const removeAlert = useCallback((id) => {
+        setAlerts(alerts.filter(alert => alert.id !== id));
+    }, [alerts]);
+
     const navigate = useNavigate();
     const login = async (e) => {
         e.preventDefault()
         if (password.trim() === '' || username.trim() === '') {
-            alert("Please select a file and provide a description.");
+            addAlert("Please select a file and provide a description.", 'warning');
             return;
         }
         console.log(username, password)
@@ -25,6 +45,7 @@ function Login() {
                 document.cookie = `token=${res.token}`
                 navigate('/')
             } else {
+                addAlert(res.result, 'error')
                 console.log(res.result)
             }
             console.log(res)
@@ -34,6 +55,16 @@ function Login() {
     }
   return (
     <div className={`grid grid-cols-2 rounded-xl shadow-md bg-gray-50 max-w-fit m-auto mt-48`}>
+        <div className='absolute z-50 w-96 right-4 top-4'>
+                {alerts.map(alert => (
+                    <Alert
+                        key={alert.id}
+                        message={alert.message}
+                        type={alert.type}
+                        onClose={() => removeAlert(alert.id)}
+                    />
+                ))}
+            </div>
             <div className='p-5 overflow-hidden'>
                 <img className='rounded-lg' src='https://img.heartlight.org/crop.php?w=600&q=95&f=overlazy/backgrounds/27.jpg' />
             </div>

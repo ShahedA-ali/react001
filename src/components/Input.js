@@ -82,7 +82,7 @@ const Input = forwardRef(function Input(
                         } input w-full ${className}`}
                         style={style}
                         onChange={onInputChange}
-                        pattern={'[A-Za-z]+'}
+                        pattern={pattern}
                         name={name}
                         ref={ref}
                         {...other}
