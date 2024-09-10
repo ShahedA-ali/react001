@@ -58,7 +58,7 @@ function Register() {
             }).then(res => res.json()).then(res => {
                 if (!res.success) {
                     console.log(res)
-                    addAlert(res.result, 'error')
+                    addAlert(res.message, 'error')
                 }else {
                     navigate('/USER_VIEW')
                 }

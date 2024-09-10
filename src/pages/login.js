@@ -45,8 +45,7 @@ function Login() {
                 document.cookie = `token=${res.token}`
                 navigate('/')
             } else {
-                addAlert(res.result, 'error')
-                console.log(res.result)
+                addAlert(res.message, 'error')
             }
             console.log(res)
         } catch (error) {
