@@ -56,12 +56,13 @@ function Update({ user, visible }) {
     }, [user.roles]);
     console.log(roles);
     const UpdateRecord = async (e, id) => {
-        e.preventDefault();
+        // e.preventDefault();
         const updated = await Fetch(
             `http://localhost:8000/api/users/${id}`,
             "PUT",
             { username, email, password, roles: selectedRoles[1]["userRoles"] }
-        ).then((res) => res.json()).then(res => addAlert(res.message, 'error'));
+        ).then((res) => res.json())
+        // .then(res => addAlert(res.message, 'error'));
         console.log(updated, "sldjfiofjio");
     };
 
