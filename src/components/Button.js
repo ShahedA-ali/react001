@@ -55,7 +55,7 @@ function Button({
                 }`}
                 style={style}
                 {...other}>
-                {icon && <span className={`${icon} icon`}></span>}
+                {icon && <span className={`${icon} icon`}>{icon}</span>}
                 {other.children && <span className={``}>{other.children}</span>}
             </button>
         </React.Fragment>

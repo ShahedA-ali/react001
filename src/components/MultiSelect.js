@@ -12,9 +12,11 @@ const MultiSelect = ({
     value: propValue = [],
     className,
     required,
+    wrapperClassName,
     childrenClassName,
     childrenStyle,
     selectedStyleClassName,
+    btnClassName,
     ...other
 }) => {
     const [data, setData] = useState(initialData);
@@ -74,7 +76,7 @@ const MultiSelect = ({
                 onClick={(e) => {
                     e.stopPropagation();
                 }}
-                className={`option-wrapper`}>
+                className={`option-wrapper ${wrapperClassName}`}>
                 <Input
                     className={` flex-1 ${className} relative ${
                         required && !value ? 'wrong' : ''
@@ -86,7 +88,7 @@ const MultiSelect = ({
                         <Button
                             onClick={() => setValue([])}
                             fillMode={'flat'}
-                            className={`text-xl absolute z-10 right-0 text-gray-400 self-start font-bold hover:text-black order-2`}
+                            className={`text-xl ${btnClassName} absolute z-10 right-0 text-gray-400 self-start font-bold hover:text-black order-2`}
                             >
                             &times;
                         </Button>

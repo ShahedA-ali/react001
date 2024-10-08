@@ -3,7 +3,7 @@ import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import Button from './Button';
 
-const ExcelExport = ({ apiData, fileName, btnText = 'Export', className}) => {
+const ExcelExport = ({ apiData, fileName, btnText = 'Export', icon, className}) => {
     const fileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
   const fileExtension = ".xlsx";
@@ -17,7 +17,7 @@ const ExcelExport = ({ apiData, fileName, btnText = 'Export', className}) => {
   };
 
   return (
-    <Button onClick={(e) => exportToCSV(apiData, fileName)} className={className}>{btnText}</Button>
+    <Button onClick={(e) => exportToCSV(apiData, fileName)} className={`${className}`} icon={icon}>{btnText}</Button>
   );
 }
 
